@@ -2,6 +2,7 @@ package com.github.mathbook3948.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 채팅 공지 등록 요청 모델.
@@ -13,6 +14,7 @@ import lombok.Getter;
  * </p>
  */
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class RegisterNoticeRequest {
 

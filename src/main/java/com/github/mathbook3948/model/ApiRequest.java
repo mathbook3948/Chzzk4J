@@ -2,7 +2,6 @@ package com.github.mathbook3948.model;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Map;
