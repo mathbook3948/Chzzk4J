@@ -66,4 +66,20 @@ public class LiveApi extends AbstractApi {
 
         return super.get(request);
     }
+
+    /**
+     * <p>
+     * 스트리밍 채널의 방송 설정을 조회할 수 있습니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-2">공식 API 문서</a>를 참조하세요.</p>
+     * </p>
+     */
+    public Response<GetLiveSettingsResponse> getLiveSettings(String accessToken) {
+        String path = "/open/v1/lives/settings";
+
+        ApiRequest<EmptyRequest, GetLiveSettingsResponse> request = new ApiRequest<>(path, accessToken, null, null, null, new TypeReference<>() {
+        });
+
+        return super.get(request);
+    }
 }

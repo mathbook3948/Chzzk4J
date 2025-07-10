@@ -50,7 +50,7 @@ public abstract class AbstractApi {
             if (req.getAccessToken() != null || req.getHeaders() != null) {
                 jettyRequest.headers(fields -> {
                     if (req.getAccessToken() != null) {
-                        fields.add("Authorization", "Bearer " + req.getAccessToken());
+                        fields.add(HttpHeader.AUTHORIZATION, "Bearer " + req.getAccessToken());
                     }
                     if (req.getHeaders() != null) {
                         req.getHeaders().forEach(fields::add);
@@ -153,6 +153,50 @@ public abstract class AbstractApi {
             return objectMapper.readValue(bodyStr, req.getResponseType());
         } catch (Exception e) {
             throw new RuntimeException("PUT request failed: " + req.getPath(), e);
+        }
+    }
+
+    protected <Req, Res> Response<Res> patch(ApiRequest<Req, Res> req) {
+        try {
+            StringBuilder urlBuilder = new StringBuilder(baseUrl).append(req.getPath());
+
+            if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
+                urlBuilder.append("?");
+                boolean first = true;
+                for (var entry : req.getQueryParams().entrySet()) {
+                    if (!first) urlBuilder.append("&");
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8))
+                            .append("=")
+                            .append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                    first = false;
+                }
+            }
+
+            String jsonBody = objectMapper.writeValueAsString(req.getBody());
+            ByteBufferRequestContent body = new ByteBufferRequestContent(
+                    MimeTypes.Type.APPLICATION_JSON.asString(),
+                    StandardCharsets.UTF_8.encode(jsonBody)
+            );
+
+            Request jettyRequest = client.newRequest(urlBuilder.toString())
+                    .method(HttpMethod.PATCH)
+                    .body(body);
+
+            jettyRequest.headers(fields -> {
+                if (req.getAccessToken() != null) {
+                    fields.add(HttpHeader.AUTHORIZATION, "Bearer " + req.getAccessToken());
+                }
+                if (req.getHeaders() != null) {
+                    req.getHeaders().forEach(fields::add);
+                }
+            });
+
+            ContentResponse res = jettyRequest.send();
+            String bodyStr = res.getContentAsString();
+
+            return objectMapper.readValue(bodyStr, req.getResponseType());
+        } catch (Exception e) {
+            throw new RuntimeException("PATCH request failed: " + req.getPath(), e);
         }
     }
 }
