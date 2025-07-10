@@ -13,6 +13,8 @@ dependencies {
     implementation "org.eclipse.jetty:jetty-client:11.0.25"
     implementation "org.eclipse.jetty.websocket:websocket-jetty-client:11.0.25"
 
+    implementation 'org.slf4j:slf4j-nop:2.0.17'
+
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.19.0"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.19.0"
 
