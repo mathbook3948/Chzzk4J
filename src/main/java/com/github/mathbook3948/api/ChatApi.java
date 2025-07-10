@@ -2,7 +2,9 @@ package com.github.mathbook3948.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mathbook3948.api.model.*;
+import com.github.mathbook3948.api.model.EmptyRequest;
+import com.github.mathbook3948.api.model.EmptyResponse;
+import com.github.mathbook3948.api.model.chat.*;
 import com.github.mathbook3948.model.ApiRequest;
 import com.github.mathbook3948.model.Response;
 import org.eclipse.jetty.client.HttpClient;
@@ -13,7 +15,7 @@ import org.eclipse.jetty.client.HttpClient;
  * <p>API Scope는 채팅 메시지 전송, 채팅 공지 등록, 채팅 설정 조회, 채팅 설정 변경입니다.</p>
  * <p>자세한 내용은
  * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live">공식 API 문서</a>를 참조하세요.</p>
- * */
+ */
 public class ChatApi extends AbstractApi {
 
     public ChatApi(HttpClient client, ObjectMapper objectMapper) {
@@ -26,7 +28,7 @@ public class ChatApi extends AbstractApi {
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined">공식 API 문서</a>를 참조하세요.</p>
      * </p>
-     * */
+     */
     public Response<SendChatResponse> sendChat(String accessToken, SendChatRequest req) {
         String path = "/open/v1/chats/send";
 
@@ -43,7 +45,7 @@ public class ChatApi extends AbstractApi {
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-1">공식 API 문서</a>를 참조하세요.</p>
      * </p>
-     * */
+     */
     public Response<EmptyResponse> setChatNotice(String accessToken, RegisterNoticeRequest req) {
         String path = "/open/v1/chats/notice";
 
@@ -59,7 +61,7 @@ public class ChatApi extends AbstractApi {
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-2">공식 API 문서</a>를 참조하세요.</p>
      * </p>
-     * */
+     */
     public Response<GetChatSettingsResponse> getChatSettings(String accessToken) {
         String path = "/open/v1/chats/settings";
 
@@ -75,7 +77,7 @@ public class ChatApi extends AbstractApi {
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-3">공식 API 문서</a>를 참조하세요.</p>
      * </p>
-     * */
+     */
     public Response<EmptyResponse> updateChatSettings(String accessToken, UpdateChatSettingsRequest req) {
         String path = "/open/v1/chats/settings";
 

@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.ChzzkClient;
-import com.github.mathbook3948.api.model.GetLiveListRequest;
-import com.github.mathbook3948.api.model.SearchCategoriesRequest;
+import com.github.mathbook3948.api.model.live.GetLiveListRequest;
+import com.github.mathbook3948.api.model.category.SearchCategoriesRequest;
 
 public class ChzzkClientTest {
     public static void main(String[] args) {

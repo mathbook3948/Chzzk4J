@@ -1,4 +1,4 @@
-package com.github.mathbook3948.api.model;
+package com.github.mathbook3948.api.model.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

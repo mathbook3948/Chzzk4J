@@ -2,7 +2,9 @@ package com.github.mathbook3948.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mathbook3948.api.model.*;
+import com.github.mathbook3948.api.model.EmptyRequest;
+import com.github.mathbook3948.api.model.EmptyResponse;
+import com.github.mathbook3948.api.model.live.*;
 import com.github.mathbook3948.model.ApiRequest;
 import com.github.mathbook3948.model.Response;
 import org.eclipse.jetty.client.HttpClient;
@@ -42,8 +44,8 @@ public class LiveApi extends AbstractApi {
 
         Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
         Map<String, String> queryParams = new HashMap<>();
-        if(req.getSize() != null) queryParams.put("size", req.getSize().toString());
-        if(req.getNext() != null) queryParams.put("next", req.getNext());
+        if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
+        if (req.getNext() != null) queryParams.put("next", req.getNext());
 
         ApiRequest<EmptyRequest, GetLiveListResponse> request = new ApiRequest<>(path, null, headers, queryParams, null, new TypeReference<>() {
         });

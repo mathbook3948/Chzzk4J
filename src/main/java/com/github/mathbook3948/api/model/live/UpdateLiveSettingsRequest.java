@@ -1,4 +1,4 @@
-package com.github.mathbook3948.api.model;
+package com.github.mathbook3948.api.model.live;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

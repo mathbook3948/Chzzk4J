@@ -1,10 +1,8 @@
-package com.github.mathbook3948.api.model;
+package com.github.mathbook3948.api.model.live;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * 방송 스트림키 조회 응답 모델.

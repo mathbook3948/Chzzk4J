@@ -1,25 +1,33 @@
-package com.github.mathbook3948.api.model;
+package com.github.mathbook3948.api.model.live;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
- * 카테고리 검색 응답 모델.
+ * 방송 설정 조회 응답 모델.
  * <p>자세한 내용은
- * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/category#undefined">공식 API 문서</a>를 참조하세요.</p>
+ * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-2">공식 API 문서</a>를 참조하세요.</p>
  */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchCategoryResponse {
+public class GetLiveSettingsResponse {
 
     /**
-     * 카테고리 목록 결과
+     * 라이브 제목
      * */
-    private List<Category> data;
+    private String defaultLiveTitle;
+
+    /**
+     * 라이브 카테고리
+     * */
+    private Category category;
+
+    /**
+     * 라이브 태그 목록
+     * */
+    private String[] tags;
 
     @Getter
     @NoArgsConstructor

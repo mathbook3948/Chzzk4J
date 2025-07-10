@@ -3,6 +3,8 @@ package com.github.mathbook3948.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.api.model.*;
+import com.github.mathbook3948.api.model.category.SearchCategoriesRequest;
+import com.github.mathbook3948.api.model.category.SearchCategoryResponse;
 import com.github.mathbook3948.model.ApiRequest;
 import com.github.mathbook3948.model.Response;
 import org.eclipse.jetty.client.HttpClient;
