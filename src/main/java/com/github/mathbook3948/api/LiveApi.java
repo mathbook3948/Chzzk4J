@@ -58,7 +58,12 @@ public class LiveApi extends AbstractApi {
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-1">공식 API 문서</a>를 참조하세요.</p>
      * </p>
      */
-    public Response<?> getStreamKey() {
+    public Response<GetStreamKeyResponse> getStreamKey(String accessToken) {
         String path = "/open/v1/lives/streamkey";
+
+        ApiRequest<EmptyRequest, GetStreamKeyResponse> request = new ApiRequest<>(path, accessToken, null, null, null, new TypeReference<>() {
+        });
+
+        return super.get(request);
     }
 }
