@@ -1,7 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.ChzzkClient;
-import com.github.mathbook3948.api.model.live.GetLiveListRequest;
 import com.github.mathbook3948.api.model.category.SearchCategoriesRequest;
+import com.github.mathbook3948.api.model.channel.GetChannelInfoRequest;
+import com.github.mathbook3948.api.model.live.GetLiveListRequest;
 
 public class ChzzkClientTest {
     public static void main(String[] args) {
@@ -29,6 +30,15 @@ public class ChzzkClientTest {
 
             System.out.println("Category Search==============================================");
             System.out.println(objectMapper.writeValueAsString(client.searchCategories(req)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            GetChannelInfoRequest req = new GetChannelInfoRequest(new String[]{"45e71a76e949e16a34764deb962f9d9f", "affa78deac0b23d2046b8ed4856c1e62"});
+
+            System.out.println("Channel Info==============================================");
+            System.out.println(objectMapper.writeValueAsString(client.getChannelInfo(req)));
         } catch (Exception e) {
             e.printStackTrace();
         }
