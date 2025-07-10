@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.ChzzkClient;
 import com.github.mathbook3948.api.model.GetLiveListRequest;
+import com.github.mathbook3948.api.model.SearchCategoriesRequest;
 
 public class ChzzkClientTest {
     public static void main(String[] args) {
@@ -14,10 +15,20 @@ public class ChzzkClientTest {
 
         ChzzkClient client = ChzzkClient.build(objectMapper, clientId, clientSecret);
 
-        GetLiveListRequest req = new GetLiveListRequest(null, null);
+        try {
+            GetLiveListRequest req = new GetLiveListRequest(null, null);
+
+            System.out.println("Live List==============================================");
+            System.out.println(objectMapper.writeValueAsString(client.getLiveList(req)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
-            System.out.println(objectMapper.writeValueAsString(client.getLiveList(req)));
+            SearchCategoriesRequest req = new SearchCategoriesRequest(null, "게임");
+
+            System.out.println("Category Search==============================================");
+            System.out.println(objectMapper.writeValueAsString(client.searchCategories(req)));
         } catch (Exception e) {
             e.printStackTrace();
         }
