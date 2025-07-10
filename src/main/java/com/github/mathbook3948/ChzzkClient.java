@@ -2,6 +2,7 @@ package com.github.mathbook3948;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.api.CategoryApi;
+import com.github.mathbook3948.api.ChannelApi;
 import com.github.mathbook3948.api.ChatApi;
 import com.github.mathbook3948.api.LiveApi;
 import com.github.mathbook3948.api.auth.AuthorizationApi;
@@ -29,6 +30,9 @@ public class ChzzkClient {
     @Delegate
     private CategoryApi categoryApi;
 
+    @Delegate
+    private ChannelApi channelApi;
+
     private ChzzkClient(ObjectMapper objectMapper, String clientId, String clientSecret) {
         if (clientId == null || clientSecret == null) {
             throw new IllegalArgumentException("clientId and clientSecret must not be null");
@@ -44,6 +48,7 @@ public class ChzzkClient {
             this.chatApi = new ChatApi(this.client, objectMapper);
             this.liveApi = new LiveApi(this.client, objectMapper, clientId, clientSecret);
             this.categoryApi = new CategoryApi(this.client, objectMapper, clientId, clientSecret);
+            this.channelApi = new ChannelApi(this.client, objectMapper, clientId, clientSecret);
             this.authorizationApi = new AuthorizationApi(this.client, objectMapper, clientId, clientSecret);
         } catch (Exception e) {
             throw new RuntimeException("Failed to start HttpClient", e);
