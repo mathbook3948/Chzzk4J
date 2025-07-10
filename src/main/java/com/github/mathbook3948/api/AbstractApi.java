@@ -14,6 +14,7 @@ import org.eclipse.jetty.http.MimeTypes;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 public abstract class AbstractApi {
 
@@ -35,13 +36,16 @@ public abstract class AbstractApi {
             // 쿼리 파라미터 처리
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
-                req.getQueryParams().forEach((k, v) ->
-                        urlBuilder.append(URLEncoder.encode(k, StandardCharsets.UTF_8))
-                                .append("=")
-                                .append(URLEncoder.encode(v, StandardCharsets.UTF_8))
-                );
-                // 마지막 & 제거
-                urlBuilder.setLength(urlBuilder.length() - 1);
+                boolean first = true;
+                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
+                    if (!first) {
+                        urlBuilder.append("&");
+                    }
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+                    urlBuilder.append("=");
+                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                    first = false;
+                }
             }
 
             Request jettyRequest = client.newRequest(urlBuilder.toString())
@@ -74,11 +78,13 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (var entry : req.getQueryParams().entrySet()) {
-                    if (!first) urlBuilder.append("&");
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8))
-                            .append("=")
-                            .append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
+                    if (!first) {
+                        urlBuilder.append("&");
+                    }
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+                    urlBuilder.append("=");
+                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
                     first = false;
                 }
             }
@@ -119,11 +125,13 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (var entry : req.getQueryParams().entrySet()) {
-                    if (!first) urlBuilder.append("&");
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8))
-                            .append("=")
-                            .append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
+                    if (!first) {
+                        urlBuilder.append("&");
+                    }
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+                    urlBuilder.append("=");
+                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
                     first = false;
                 }
             }
@@ -163,11 +171,13 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (var entry : req.getQueryParams().entrySet()) {
-                    if (!first) urlBuilder.append("&");
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8))
-                            .append("=")
-                            .append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
+                    if (!first) {
+                        urlBuilder.append("&");
+                    }
+                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+                    urlBuilder.append("=");
+                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
                     first = false;
                 }
             }
