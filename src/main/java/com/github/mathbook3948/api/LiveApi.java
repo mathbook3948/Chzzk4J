@@ -37,7 +37,7 @@ public class LiveApi extends AbstractApi {
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined">공식 API 문서</a>를 참조하세요.</p>
      * </p>
      */
-    public Response<?> getLiveList(GetLiveListRequest req) {
+    public Response<GetLiveListResponse> getLiveList(GetLiveListRequest req) {
         String path = "/open/v1/lives";
 
         Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
@@ -49,5 +49,16 @@ public class LiveApi extends AbstractApi {
         });
 
         return super.get(request);
+    }
+
+    /**
+     * <p>
+     * 스트리밍 채널의 스트림키를 조회할 수 있습니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-1">공식 API 문서</a>를 참조하세요.</p>
+     * </p>
+     */
+    public Response<?> getStreamKey() {
+        String path = "/open/v1/lives/streamkey";
     }
 }

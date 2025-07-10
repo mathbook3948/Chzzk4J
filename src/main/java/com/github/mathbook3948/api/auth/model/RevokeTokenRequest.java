@@ -2,6 +2,7 @@ package com.github.mathbook3948.api.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Access Token 삭제 요청 모델.
@@ -9,6 +10,7 @@ import lombok.Getter;
  * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/authorization#access-token-2">공식 API 문서</a>를 참조하세요.</p>
  */
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class RevokeTokenRequest {
 
@@ -24,7 +26,7 @@ public class RevokeTokenRequest {
 
     /**
      * 삭제를 원하는 Access/Refresh token
-     * */
+     */
     private String token;
 
     /**
