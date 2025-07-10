@@ -82,4 +82,21 @@ public class LiveApi extends AbstractApi {
 
         return super.get(request);
     }
+
+    /**
+     * <p>
+     * 스트리밍 채널의 방송 설정을 변경할 수 있습니다.
+     * 설정 변경 시 API 요청을 통해 필요한 특정 값만 변경하는 것도 가능합니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-3">공식 API 문서</a>를 참조하세요.</p>
+     * </p>
+     */
+    public Response<?> updateLiveSettings(String accessToken, UpdateLiveSettingsRequest req) {
+        String path = "/open/v1/lives/settings";
+
+        ApiRequest<UpdateLiveSettingsRequest, EmptyResponse> request = new ApiRequest<>(path, accessToken, null, null, req, new TypeReference<>() {
+        });
+
+        return super.patch(request);
+    }
 }
