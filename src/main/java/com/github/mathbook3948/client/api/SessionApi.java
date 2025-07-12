@@ -6,6 +6,7 @@ import com.github.mathbook3948.client.api.model.EmptyRequest;
 import com.github.mathbook3948.client.api.model.session.*;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
+import com.github.mathbook3948.config.ChzzkClientConfig;
 import org.eclipse.jetty.client.HttpClient;
 
 import java.util.Arrays;
@@ -43,7 +44,7 @@ public class SessionApi extends AbstractApi {
     public Response<CreateClientSessionResponse> createClientSession() {
         String path = "/open/v1/sessions/auth/client";
 
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
 
         ApiRequest<EmptyRequest, CreateClientSessionResponse> request = new ApiRequest<>(path, null, headers, null, null, new TypeReference<>() {
         });
@@ -79,7 +80,7 @@ public class SessionApi extends AbstractApi {
     public Response<GetClientSessionListResponse> getClientSessionList(GetClientSessionListRequest req) {
         String path = "/open/v1/sessions/client";
 
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
         Map<String, String> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if(req.getPage() != null) queryParams.put("page", req.getPage());
@@ -100,7 +101,7 @@ public class SessionApi extends AbstractApi {
     public Response<GetUserSessionListResponse> getUserSessionList(GetUserSessionListRequest req) {
         String path = "/open/v1/sessions";
 
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
         Map<String, String> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if(req.getPage() != null) queryParams.put("page", req.getPage());

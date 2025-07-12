@@ -7,6 +7,7 @@ import com.github.mathbook3948.client.api.model.channel.GetChannelInfoRequest;
 import com.github.mathbook3948.client.api.model.channel.GetChannelInfoResponse;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
+import com.github.mathbook3948.config.ChzzkClientConfig;
 import org.eclipse.jetty.client.HttpClient;
 
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class ChannelApi extends AbstractApi {
      */
     public Response<GetChannelInfoResponse> getChannelInfo(GetChannelInfoRequest req) {
         String path = "/open/v1/channels";
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
         Map<String, String> queryParams = new HashMap<>();
         queryParams.put("channelIds", Arrays.toString(req.getChannelIds()));
 

@@ -7,6 +7,7 @@ import com.github.mathbook3948.client.api.model.category.SearchCategoriesRequest
 import com.github.mathbook3948.client.api.model.category.SearchCategoryResponse;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
+import com.github.mathbook3948.config.ChzzkClientConfig;
 import org.eclipse.jetty.client.HttpClient;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class CategoryApi extends AbstractApi {
      */
     public Response<SearchCategoryResponse> searchCategories(SearchCategoriesRequest req) {
         String path = "/open/v1/categories/search";
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
         Map<String, String> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         queryParams.put("query", req.getQuery());

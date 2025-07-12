@@ -11,7 +11,9 @@ repositories {
 
 dependencies {
     implementation "org.eclipse.jetty:jetty-client:11.0.25"
-    implementation "org.eclipse.jetty.websocket:websocket-jetty-client:11.0.25"
+
+    // https://mvnrepository.com/artifact/io.socket/socket.io-client
+    implementation("io.socket:socket.io-client:2.0.1")
 
     implementation 'org.slf4j:slf4j-nop:2.0.17'
 

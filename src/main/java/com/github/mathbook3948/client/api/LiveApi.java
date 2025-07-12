@@ -7,6 +7,7 @@ import com.github.mathbook3948.client.api.model.EmptyResponse;
 import com.github.mathbook3948.client.api.model.live.*;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
+import com.github.mathbook3948.config.ChzzkClientConfig;
 import org.eclipse.jetty.client.HttpClient;
 
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class LiveApi extends AbstractApi {
     public Response<GetLiveListResponse> getLiveList(GetLiveListRequest req) {
         String path = "/open/v1/lives";
 
-        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
         Map<String, String> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if (req.getNext() != null) queryParams.put("next", req.getNext());
