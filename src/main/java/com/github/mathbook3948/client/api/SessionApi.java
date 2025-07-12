@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.client.api.model.EmptyRequest;
 import com.github.mathbook3948.client.api.model.session.CreateUserSessionResponse;
+import com.github.mathbook3948.client.api.model.session.GetClientSessionListRequest;
+import com.github.mathbook3948.client.api.model.session.GetClientSessionListResponse;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
 import com.github.mathbook3948.client.api.model.session.CreateClientSessionResponse;
@@ -58,7 +60,7 @@ public class SessionApi extends AbstractApi {
      * 연결된 세션은 세션 생성에 사용된 Access Token과 동일한 유저 이벤트만 구독할 수 있습니다.<br/>
      * 유저별 최대 3개의 연결을 유지할 수 있습니다
      * <p>자세한 내용은
-     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined">공식 API 문서</a>를 참조하세요.</p>
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-1">공식 API 문서</a>를 참조하세요.</p>
      * </p>
      * */
     public Response<?> createUserSession(String accessToken) {
@@ -70,4 +72,24 @@ public class SessionApi extends AbstractApi {
         return super.get(request);
     }
 
+    /**
+     * <p>
+     * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-2">공식 API 문서</a>를 참조하세요.</p>
+     * </p>
+     * */
+    public Response<GetClientSessionListResponse> getClientSessionList(GetClientSessionListRequest req) {
+        String path = "/open/v1/sessions/client";
+
+        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> queryParams = new HashMap<>();
+        if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
+        if(req.getPage() != null) queryParams.put("page", req.getPage());
+
+        ApiRequest<EmptyRequest, GetClientSessionListResponse> request = new ApiRequest<>(path, null, headers, queryParams, null, new TypeReference<>() {
+        });
+
+        return super.get(request);
+    }
 }
