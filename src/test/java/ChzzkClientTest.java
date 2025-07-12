@@ -1,8 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.ChzzkClient;
-import com.github.mathbook3948.api.model.category.SearchCategoriesRequest;
-import com.github.mathbook3948.api.model.channel.GetChannelInfoRequest;
-import com.github.mathbook3948.api.model.live.GetLiveListRequest;
+import com.github.mathbook3948.client.api.model.category.SearchCategoriesRequest;
+import com.github.mathbook3948.client.api.model.channel.GetChannelInfoRequest;
+import com.github.mathbook3948.client.api.model.live.GetLiveListRequest;
 
 public class ChzzkClientTest {
     public static void main(String[] args) {
@@ -39,6 +39,13 @@ public class ChzzkClientTest {
 
             System.out.println("Channel Info==============================================");
             System.out.println(objectMapper.writeValueAsString(client.getChannelInfo(req)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println("Create Client Session==============================================");
+            System.out.println(objectMapper.writeValueAsString(client.createClientSession()));
         } catch (Exception e) {
             e.printStackTrace();
         }
