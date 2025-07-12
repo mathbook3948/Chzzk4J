@@ -3,12 +3,9 @@ package com.github.mathbook3948.client.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.client.api.model.EmptyRequest;
-import com.github.mathbook3948.client.api.model.session.CreateUserSessionResponse;
-import com.github.mathbook3948.client.api.model.session.GetClientSessionListRequest;
-import com.github.mathbook3948.client.api.model.session.GetClientSessionListResponse;
+import com.github.mathbook3948.client.api.model.session.*;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
-import com.github.mathbook3948.client.api.model.session.CreateClientSessionResponse;
 import org.eclipse.jetty.client.HttpClient;
 
 import java.util.Arrays;
@@ -76,7 +73,7 @@ public class SessionApi extends AbstractApi {
      * <p>
      * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
      * <p>자세한 내용은
-     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-2">공식 API 문서</a>를 참조하세요.</p>
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-3">공식 API 문서</a>를 참조하세요.</p>
      * </p>
      * */
     public Response<GetClientSessionListResponse> getClientSessionList(GetClientSessionListRequest req) {
@@ -88,6 +85,27 @@ public class SessionApi extends AbstractApi {
         if(req.getPage() != null) queryParams.put("page", req.getPage());
 
         ApiRequest<EmptyRequest, GetClientSessionListResponse> request = new ApiRequest<>(path, null, headers, queryParams, null, new TypeReference<>() {
+        });
+
+        return super.get(request);
+    }
+
+    /**
+     * <p>
+     * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-4">공식 API 문서</a>를 참조하세요.</p>
+     * </p>
+     * */
+    public Response<GetUserSessionListResponse> getUserSessionList(GetUserSessionListRequest req) {
+        String path = "/open/v1/sessions";
+
+        Map<String, String> headers = Map.of("Client-Id", clientId, "Client-Secret", clientSecret, "Content-Type", "application/json");
+        Map<String, String> queryParams = new HashMap<>();
+        if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
+        if(req.getPage() != null) queryParams.put("page", req.getPage());
+
+        ApiRequest<EmptyRequest, GetUserSessionListResponse> request = new ApiRequest<>(path, null, headers, queryParams, null, new TypeReference<>() {
         });
 
         return super.get(request);

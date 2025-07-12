@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 세션 생성(클라이언트) 요청 모델.
+ * 세션 생성(유저) 요청 모델.
  * <p>자세한 내용은
- * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-3">공식 API 문서</a>를 참조하세요.</p>
+ * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-4">공식 API 문서</a>를 참조하세요.</p>
  */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetClientSessionListRequest {
+public class GetUserSessionListRequest {
 
     /**
      * 조회할 카테고리 개수. 최소 1 ~ 최대 50 요청 가능
