@@ -40,7 +40,6 @@ public class ChzzkClientTest {
         } finally {
             try {
                 client.getHttpClient().stop();
-                client.getWebSocketClient().stop();
             } catch (Exception e) {
                 e.printStackTrace();
             }
