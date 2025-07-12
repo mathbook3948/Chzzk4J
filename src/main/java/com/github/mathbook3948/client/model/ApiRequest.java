@@ -12,7 +12,7 @@ public class ApiRequest<Req, Res> {
     private final String path;
     private final String accessToken;
     private final Map<String, String> headers;
-    private final Map<String, String> queryParams;
+    private final Map<String, Object> queryParams;
     private final Req body;
     private final TypeReference<Response<Res>> responseType;
 }

@@ -81,7 +81,7 @@ public class SessionApi extends AbstractApi {
         String path = "/open/v1/sessions/client";
 
         Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
-        Map<String, String> queryParams = new HashMap<>();
+        Map<String, Object> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if(req.getPage() != null) queryParams.put("page", req.getPage());
 
@@ -102,7 +102,7 @@ public class SessionApi extends AbstractApi {
         String path = "/open/v1/sessions";
 
         Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
-        Map<String, String> queryParams = new HashMap<>();
+        Map<String, Object> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if(req.getPage() != null) queryParams.put("page", req.getPage());
 

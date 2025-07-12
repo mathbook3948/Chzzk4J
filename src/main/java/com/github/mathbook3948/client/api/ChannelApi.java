@@ -42,8 +42,8 @@ public class ChannelApi extends AbstractApi {
     public Response<GetChannelInfoResponse> getChannelInfo(GetChannelInfoRequest req) {
         String path = "/open/v1/channels";
         Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("channelIds", Arrays.toString(req.getChannelIds()));
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("channelIds", req.getChannelIds());
 
         ApiRequest<EmptyRequest, GetChannelInfoResponse> request = new ApiRequest<>(path, null, headers, queryParams, null, new TypeReference<>() {
         });

@@ -44,7 +44,7 @@ public class LiveApi extends AbstractApi {
         String path = "/open/v1/lives";
 
         Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
-        Map<String, String> queryParams = new HashMap<>();
+        Map<String, Object> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         if (req.getNext() != null) queryParams.put("next", req.getNext());
 

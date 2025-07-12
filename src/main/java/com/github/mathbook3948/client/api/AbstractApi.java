@@ -1,9 +1,9 @@
 package com.github.mathbook3948.client.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mathbook3948.config.ChzzkClientConfig;
 import com.github.mathbook3948.client.model.ApiRequest;
 import com.github.mathbook3948.client.model.Response;
+import com.github.mathbook3948.config.ChzzkClientConfig;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
@@ -14,6 +14,7 @@ import org.eclipse.jetty.http.MimeTypes;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Map;
 
 public abstract class AbstractApi {
@@ -37,14 +38,24 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
-                    if (!first) {
-                        urlBuilder.append("&");
+                for (Map.Entry<String, Object> entry : req.getQueryParams().entrySet()) {
+                    String key = URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8);
+
+                    Object value = entry.getValue();
+                    if (value instanceof String[]) {
+                        for (String v : (String[]) value) {
+                            appendParam(urlBuilder, key, v, first);
+                            first = false;
+                        }
+                    } else if (value instanceof Collection) {
+                        for (Object v : (Collection<?>) value) {
+                            appendParam(urlBuilder, key, String.valueOf(v), first);
+                            first = false;
+                        }
+                    } else {
+                        appendParam(urlBuilder, key, String.valueOf(value), first);
+                        first = false;
                     }
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
-                    urlBuilder.append("=");
-                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-                    first = false;
                 }
             }
 
@@ -78,15 +89,26 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
-                    if (!first) {
-                        urlBuilder.append("&");
+                for (Map.Entry<String, Object> entry : req.getQueryParams().entrySet()) {
+                    String key = URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8);
+
+                    Object value = entry.getValue();
+                    if (value instanceof String[]) {
+                        for (String v : (String[]) value) {
+                            appendParam(urlBuilder, key, v, first);
+                            first = false;
+                        }
+                    } else if (value instanceof Collection) {
+                        for (Object v : (Collection<?>) value) {
+                            appendParam(urlBuilder, key, String.valueOf(v), first);
+                            first = false;
+                        }
+                    } else {
+                        appendParam(urlBuilder, key, String.valueOf(value), first);
+                        first = false;
                     }
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
-                    urlBuilder.append("=");
-                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-                    first = false;
                 }
+
             }
 
             String jsonBody = objectMapper.writeValueAsString(req.getBody());
@@ -125,15 +147,26 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
-                    if (!first) {
-                        urlBuilder.append("&");
+                for (Map.Entry<String, Object> entry : req.getQueryParams().entrySet()) {
+                    String key = URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8);
+
+                    Object value = entry.getValue();
+                    if (value instanceof String[]) {
+                        for (String v : (String[]) value) {
+                            appendParam(urlBuilder, key, v, first);
+                            first = false;
+                        }
+                    } else if (value instanceof Collection) {
+                        for (Object v : (Collection<?>) value) {
+                            appendParam(urlBuilder, key, String.valueOf(v), first);
+                            first = false;
+                        }
+                    } else {
+                        appendParam(urlBuilder, key, String.valueOf(value), first);
+                        first = false;
                     }
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
-                    urlBuilder.append("=");
-                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-                    first = false;
                 }
+
             }
 
             String jsonBody = objectMapper.writeValueAsString(req.getBody());
@@ -171,14 +204,24 @@ public abstract class AbstractApi {
             if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
                 urlBuilder.append("?");
                 boolean first = true;
-                for (Map.Entry<String, String> entry : req.getQueryParams().entrySet()) {
-                    if (!first) {
-                        urlBuilder.append("&");
+                for (Map.Entry<String, Object> entry : req.getQueryParams().entrySet()) {
+                    String key = URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8);
+
+                    Object value = entry.getValue();
+                    if (value instanceof String[]) {
+                        for (String v : (String[]) value) {
+                            appendParam(urlBuilder, key, v, first);
+                            first = false;
+                        }
+                    } else if (value instanceof Collection) {
+                        for (Object v : (Collection<?>) value) {
+                            appendParam(urlBuilder, key, String.valueOf(v), first);
+                            first = false;
+                        }
+                    } else {
+                        appendParam(urlBuilder, key, String.valueOf(value), first);
+                        first = false;
                     }
-                    urlBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
-                    urlBuilder.append("=");
-                    urlBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-                    first = false;
                 }
             }
 
@@ -208,5 +251,14 @@ public abstract class AbstractApi {
         } catch (Exception e) {
             throw new RuntimeException("PATCH request failed: " + req.getPath(), e);
         }
+    }
+
+    private void appendParam(StringBuilder builder, String key, String value, boolean isFirst) {
+        if (!isFirst) {
+            builder.append("&");
+        }
+        builder.append(key);
+        builder.append("=");
+        builder.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
     }
 }

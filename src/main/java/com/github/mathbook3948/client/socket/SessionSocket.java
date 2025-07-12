@@ -166,7 +166,7 @@ public class SessionSocket extends AbstractSocketApi {
      */
     public Response<EmptyResponse> subscribeChatEvent(String sessionKey) {
         String path = "/open/v1/sessions/events/subscribe/chat";
-        Map<String, String> queryParams = Map.of("sessionKey", sessionKey);
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
 
         ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
         });
@@ -184,7 +184,7 @@ public class SessionSocket extends AbstractSocketApi {
      */
     public Response<EmptyResponse> unsubscribeChatEvent(String sessionKey) {
         String path = "/open/v1/sessions/events/unsubscribe/chat";
-        Map<String, String> queryParams = Map.of("sessionKey", sessionKey);
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
 
         ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
         });
@@ -205,7 +205,7 @@ public class SessionSocket extends AbstractSocketApi {
      */
     public Response<EmptyResponse> subscribeDonationEvent(String sessionKey) {
         String path = "/open/v1/sessions/events/subscribe/donation";
-        Map<String, String> queryParams = Map.of("sessionKey", sessionKey);
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
 
         ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
         });
@@ -223,7 +223,7 @@ public class SessionSocket extends AbstractSocketApi {
      */
     public Response<EmptyResponse> unsubscribeDonationEvent(String sessionKey) {
         String path = "/open/v1/sessions/events/unsubscribe/donation";
-        Map<String, String> queryParams = Map.of("sessionKey", sessionKey);
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
 
         ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
         });

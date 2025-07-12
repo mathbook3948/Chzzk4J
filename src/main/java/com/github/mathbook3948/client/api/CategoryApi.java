@@ -41,7 +41,7 @@ public class CategoryApi extends AbstractApi {
     public Response<SearchCategoryResponse> searchCategories(SearchCategoriesRequest req) {
         String path = "/open/v1/categories/search";
         Map<String, String> headers = ChzzkClientConfig.getClientHeaders(clientId, clientSecret);
-        Map<String, String> queryParams = new HashMap<>();
+        Map<String, Object> queryParams = new HashMap<>();
         if (req.getSize() != null) queryParams.put("size", req.getSize().toString());
         queryParams.put("query", req.getQuery());
 
