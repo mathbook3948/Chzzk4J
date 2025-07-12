@@ -17,37 +17,33 @@ public class ChzzkClientTest {
         ChzzkClient client = ChzzkClient.build(objectMapper, clientId, clientSecret);
 
         try {
-            GetLiveListRequest req = new GetLiveListRequest(null, null);
+
+            GetLiveListRequest liveListReq = new GetLiveListRequest(null, null);
 
             System.out.println("Live List==============================================");
-            System.out.println(objectMapper.writeValueAsString(client.getLiveList(req)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.out.println(objectMapper.writeValueAsString(client.getLiveList(liveListReq)));
 
-        try {
-            SearchCategoriesRequest req = new SearchCategoriesRequest(null, "게임");
+            SearchCategoriesRequest categorySearchReq = new SearchCategoriesRequest(null, "게임");
 
             System.out.println("Category Search==============================================");
-            System.out.println(objectMapper.writeValueAsString(client.searchCategories(req)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.out.println(objectMapper.writeValueAsString(client.searchCategories(categorySearchReq)));
 
-        try {
-            GetChannelInfoRequest req = new GetChannelInfoRequest(new String[]{"45e71a76e949e16a34764deb962f9d9f", "affa78deac0b23d2046b8ed4856c1e62"});
+            GetChannelInfoRequest channelInfoReq = new GetChannelInfoRequest(new String[]{"45e71a76e949e16a34764deb962f9d9f", "affa78deac0b23d2046b8ed4856c1e62"});
 
             System.out.println("Channel Info==============================================");
-            System.out.println(objectMapper.writeValueAsString(client.getChannelInfo(req)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.out.println(objectMapper.writeValueAsString(client.getChannelInfo(channelInfoReq)));
 
-        try {
             System.out.println("Create Client Session==============================================");
             System.out.println(objectMapper.writeValueAsString(client.createClientSession()));
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                client.getHttpClient().stop();
+                client.getWebSocketClient().stop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
