@@ -6,6 +6,15 @@ plugins {
 group = 'com.github.mathbook3948'
 version = '1.0.1'
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 shadowJar {
     archiveClassifier.set('')
 }

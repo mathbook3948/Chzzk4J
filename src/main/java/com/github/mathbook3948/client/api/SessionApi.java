@@ -34,12 +34,10 @@ public class SessionApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * Client 인증을 통해 소켓 연결을 위한 URL을 요청합니다. 생성된 URL은 일정 시간 동안만 유효합니다.
      * 최대 10개의 연결을 유지할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<CreateClientSessionResponse> createClientSession() {
         String path = "/open/v1/sessions/auth/client";
@@ -53,13 +51,11 @@ public class SessionApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * Access Token 인증을 통해 소켓 연결을 위한 URL을 요청합니다. 생성된 URL은 일정 시간 동안만 유효합니다.<br/>
      * 연결된 세션은 세션 생성에 사용된 Access Token과 동일한 유저 이벤트만 구독할 수 있습니다.<br/>
      * 유저별 최대 3개의 연결을 유지할 수 있습니다
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-1">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      * */
     public Response<?> createUserSession(String accessToken) {
         String path = "/open/v1/sessions/auth";
@@ -71,11 +67,9 @@ public class SessionApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-3">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      * */
     public Response<GetClientSessionListResponse> getClientSessionList(GetClientSessionListRequest req) {
         String path = "/open/v1/sessions/client";
@@ -92,11 +86,9 @@ public class SessionApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-4">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      * */
     public Response<GetUserSessionListResponse> getUserSessionList(GetUserSessionListRequest req) {
         String path = "/open/v1/sessions";

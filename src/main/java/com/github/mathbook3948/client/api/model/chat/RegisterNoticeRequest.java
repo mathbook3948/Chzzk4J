@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
  * {@code messageId}가 우선 적용되며, 없을 경우 {@code message}의 내용으로 새 공지를 생성합니다.
  * <p>자세한 내용은
  * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-1">공식 API 문서</a>를 참조하세요.</p>
- * </p>
  */
 @Getter
 @NoArgsConstructor

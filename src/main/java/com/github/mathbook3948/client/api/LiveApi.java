@@ -34,11 +34,9 @@ public class LiveApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 현재 진행 중인 라이브의 전체 목록을 조회할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<GetLiveListResponse> getLiveList(GetLiveListRequest req) {
         String path = "/open/v1/lives";
@@ -55,11 +53,9 @@ public class LiveApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 스트리밍 채널의 스트림키를 조회할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-1">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<GetStreamKeyResponse> getStreamKey(String accessToken) {
         String path = "/open/v1/lives/streamkey";
@@ -71,11 +67,9 @@ public class LiveApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 스트리밍 채널의 방송 설정을 조회할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-2">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<GetLiveSettingsResponse> getLiveSettings(String accessToken) {
         String path = "/open/v1/lives/settings";
@@ -87,12 +81,10 @@ public class LiveApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 스트리밍 채널의 방송 설정을 변경할 수 있습니다.
      * 설정 변경 시 API 요청을 통해 필요한 특정 값만 변경하는 것도 가능합니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-3">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<?> updateLiveSettings(String accessToken, UpdateLiveSettingsRequest req) {
         String path = "/open/v1/lives/settings";

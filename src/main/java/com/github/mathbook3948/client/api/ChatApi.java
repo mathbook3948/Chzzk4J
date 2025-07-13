@@ -23,11 +23,9 @@ public class ChatApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 채팅 메시지를 전송할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<SendChatResponse> sendChat(String accessToken, SendChatRequest req) {
         String path = "/open/v1/chats/send";
@@ -39,12 +37,10 @@ public class ChatApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 채팅 공지사항을 등록할 수 있습니다.
      * 신규 메시지 또는 전송된 기존메시지로 공지사항을 등록이 가능합니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-1">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<EmptyResponse> setChatNotice(String accessToken, RegisterNoticeRequest req) {
         String path = "/open/v1/chats/notice";
@@ -56,11 +52,9 @@ public class ChatApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 채널의 채팅 설정을 조회할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-2">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<GetChatSettingsResponse> getChatSettings(String accessToken) {
         String path = "/open/v1/chats/settings";
@@ -72,11 +66,9 @@ public class ChatApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 채널의 채팅 설정을 변경할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/chat#undefined-3">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<EmptyResponse> updateChatSettings(String accessToken, UpdateChatSettingsRequest req) {
         String path = "/open/v1/chats/settings";

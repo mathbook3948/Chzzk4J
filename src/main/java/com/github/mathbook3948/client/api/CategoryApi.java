@@ -32,11 +32,9 @@ public class CategoryApi extends AbstractApi {
     }
 
     /**
-     * <p>
      * 카테고리를 검색하여 목록 및 정보를 조회할 수 있습니다.
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/category#undefined">공식 API 문서</a>를 참조하세요.</p>
-     * </p>
      */
     public Response<SearchCategoryResponse> searchCategories(SearchCategoriesRequest req) {
         String path = "/open/v1/categories/search";
