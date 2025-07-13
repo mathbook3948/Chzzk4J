@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mathbook3948.client.api.*;
 import com.github.mathbook3948.client.api.auth.AuthorizationApi;
 import com.github.mathbook3948.client.socket.SessionSocket;
+import com.github.mathbook3948.client.unofficial.api.UnOfficialChannelApi;
 import lombok.Getter;
 import lombok.experimental.Delegate;
 import org.eclipse.jetty.client.HttpClient;
@@ -40,6 +41,9 @@ public class ChzzkClient {
     @Delegate
     private SessionSocket sessionWebsocket;
 
+    @Delegate
+    private UnOfficialChannelApi unOfficialChannelApi;
+
     private ChzzkClient(HttpClient httpClient, ObjectMapper objectMapper, String clientId, String clientSecret) {
         if (clientId == null || clientSecret == null) {
             throw new IllegalArgumentException("clientId and clientSecret must not be null");
@@ -62,6 +66,7 @@ public class ChzzkClient {
             this.userApi = new UserApi(this.httpClient, objectMapper);
             this.sessionApi = new SessionApi(this.httpClient, objectMapper, clientId, clientSecret);
             this.sessionWebsocket = new SessionSocket(httpClient, objectMapper);
+            this.unOfficialChannelApi = new UnOfficialChannelApi(httpClient, objectMapper);
             this.authorizationApi = new AuthorizationApi(this.httpClient, objectMapper, clientId, clientSecret);
         } catch (Exception e) {
             throw new RuntimeException("Failed in ChzzkClient", e);

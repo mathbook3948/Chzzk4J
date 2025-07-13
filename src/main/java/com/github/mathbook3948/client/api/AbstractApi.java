@@ -19,7 +19,7 @@ import java.util.Map;
 
 public abstract class AbstractApi {
 
-    private final String baseUrl = ChzzkClientConfig.API_BASE_URL;
+    private final String baseUrl = ChzzkClientConfig.OPENAPI_BASE_URL;
 
     private final HttpClient client;
 

@@ -35,6 +35,9 @@ public class ChzzkClientTest {
 
             System.out.println("Create Client Session==============================================");
             System.out.println(objectMapper.writeValueAsString(client.createClientSession()));
+
+            System.out.println("UnOfficial API Test Start===========================================================");
+            System.out.println(objectMapper.writeValueAsString(client.getChannelLiveStatus("a048127622edd6c3ee8e477471a1d823")));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
