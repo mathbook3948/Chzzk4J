@@ -1,5 +1,6 @@
 package com.github.mathbook3948.client.socket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SocketSystemMessageSubscribed {
 
     /**
      * <p>이벤트 종류</p>
-     * <p>CHAT/DONATION</p>
+     * <p>CHAT/DONATION/SUBSCRIPTION</p>
      * */
     private String eventType;
 

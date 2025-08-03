@@ -253,6 +253,56 @@ public abstract class AbstractApi {
         }
     }
 
+    protected <Req, Res> Response<Res> delete(ApiRequest<Req, Res> req) {
+        try {
+            StringBuilder urlBuilder = new StringBuilder(baseUrl).append(req.getPath());
+
+            if (req.getQueryParams() != null && !req.getQueryParams().isEmpty()) {
+                urlBuilder.append("?");
+                boolean first = true;
+                for (Map.Entry<String, Object> entry : req.getQueryParams().entrySet()) {
+                    String key = URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8);
+
+                    Object value = entry.getValue();
+                    if (value instanceof String[]) {
+                        for (String v : (String[]) value) {
+                            appendParam(urlBuilder, key, v, first);
+                            first = false;
+                        }
+                    } else if (value instanceof Collection) {
+                        for (Object v : (Collection<?>) value) {
+                            appendParam(urlBuilder, key, String.valueOf(v), first);
+                            first = false;
+                        }
+                    } else {
+                        appendParam(urlBuilder, key, String.valueOf(value), first);
+                        first = false;
+                    }
+                }
+            }
+
+            Request jettyRequest = client.newRequest(urlBuilder.toString())
+                    .method(HttpMethod.DELETE);
+
+            jettyRequest.headers(fields -> {
+                if (req.getAccessToken() != null) {
+                    fields.add(HttpHeader.AUTHORIZATION, "Bearer " + req.getAccessToken());
+                }
+                if (req.getHeaders() != null) {
+                    req.getHeaders().forEach(fields::add);
+                }
+            });
+
+            ContentResponse res = jettyRequest.send();
+            String bodyStr = res.getContentAsString();
+
+            return objectMapper.readValue(bodyStr, req.getResponseType());
+        } catch (Exception e) {
+            throw new RuntimeException("DELETE request failed: " + req.getPath(), e);
+        }
+    }
+
+
     private void appendParam(StringBuilder builder, String key, String value, boolean isFirst) {
         if (!isFirst) {
             builder.append("&");

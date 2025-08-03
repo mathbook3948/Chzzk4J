@@ -1,5 +1,6 @@
 package com.github.mathbook3948.client.socket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Map;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SocketSubscribedChatMessage {
 
     /**
@@ -30,6 +32,17 @@ public class SocketSubscribedChatMessage {
      * 채팅 메시지 작성자 프로필 정보
      * */
     private Profile profile;
+
+    /**
+     * 유저 채널 권한
+     * <p>
+     *     streamer : 스트리머<br/>
+     *     common_user : 일반 유저<br/>
+     *     streaming_channel_manager : 채널 관리자<br/>
+     *     streaming_chat_manager : 채팅 운영자
+     * </p>
+     * */
+    private String userRoleCode;
 
     /**
      * 채팅 메시지 내용

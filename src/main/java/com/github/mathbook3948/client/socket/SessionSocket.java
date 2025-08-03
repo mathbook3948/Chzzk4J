@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 /**
  * <p>세션 생성, 세션 목록 조회, 이벤트 구독 및 취소를 할 수 있습니다.</p>
  * <p>세션 API 중 아래 API Scope를 호출하려면 사용자 계정으로 인증하여 얻은 Access Token이 필요합니다.</p>
- * <p>API Scope는 채팅 메시지 조회, 후원 조회입니다.</p>
+ * <p>API Scope는 채팅 메시지 조회, 후원 조회, 구독 조회입니다.</p>
  * <p>자세한 내용은
  * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session">공식 API 문서</a>를 참조하세요.</p>
  */
@@ -154,11 +154,32 @@ public class SessionSocket extends AbstractSocketApi {
     }
 
     /**
+     * WebSocket으로 전달되는 {@code SUBSCRIPTION} 이벤트 메시지를 수신하기 위한 핸들러를 등록합니다.
+     * <p>
+     * 후원 이벤트 구독이 완료된 후, 구독한 채널에서 구독이 발생하면 해당 이벤트가 {@code SUBSCRIPTION} 메시지로 전달됩니다.
+     * </p>
+     *
+     * @param socket          이벤트 핸들러를 등록할 {@link Socket} 인스턴스
+     * @param onSubscriptionEvent 수신된 구독 이벤트 메시지를 처리할 콜백
+     * @throws IllegalArgumentException {@code SUBSCRIPTION} 이벤트 메시지가 null이거나 형식이 잘못된 경우
+     */
+    public void addSubscriptionEventHandler(Socket socket, Consumer<SocketSubscribedSubscriptionMessage> onSubscriptionEvent) {
+        socket.on("SUBSCRIPTION", args -> {
+            if (args.length == 0)
+                throw new IllegalArgumentException("SUBSCRIPTION event received but args is null or empty");
+
+            SocketSubscribedSubscriptionMessage msg = objectMapper.convertValue(args[0], SocketSubscribedSubscriptionMessage.class);
+
+            onSubscriptionEvent.accept(msg);
+        });
+    }
+
+    /**
      * 요청한 세션에 사용자의 채팅 이벤트를 구독합니다.<br/>
      * 구독이 완료될 경우 요청한 세션으로 이벤트 구독 메시지가 전달 됩니다.<br/>
      * 채팅 이벤트 구독 시, 구독한 채널에 채팅이 발생할 때 채팅 이벤트 메시지가 전달됩니다.
      * <p>관련 Scope : 채팅 메시지 조회</p>
-     * <p>*세션당 최대 30개의 이벤트(채팅 및 후원)를 구독할 수 있습니다.</p>
+     * <p>*세션당 최대 30개의 이벤트(채팅, 후원, 구독)를 구독할 수 있습니다.</p>
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-5">공식 API 문서</a>를 참조하세요.</p>
      */
@@ -193,7 +214,7 @@ public class SessionSocket extends AbstractSocketApi {
      * 구독이 완료될 경우 요청한 세션으로 이벤트 구독 메시지가 전달 됩니다.<br/>
      * 이벤트 구독 시, 구독한 채널에 후원이 발생할 때 후원 이벤트 메시지가 전달됩니다.
      * <p>관련 Scope : 후원 조회</p>
-     * <p>*세션당 최대 30개의 이벤트(채팅 및 후원)를 구독할 수 있습니다.</p>
+     * <p>*세션당 최대 30개의 이벤트(채팅, 후원, 구독)를 구독할 수 있습니다.</p>
      * <p>자세한 내용은
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-7">공식 API 문서</a>를 참조하세요.</p>
      */
@@ -214,6 +235,41 @@ public class SessionSocket extends AbstractSocketApi {
      * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-8">공식 API 문서</a>를 참조하세요.</p>
      */
     public Response<EmptyResponse> unsubscribeDonationEvent(String sessionKey) {
+        String path = "/open/v1/sessions/events/unsubscribe/donation";
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
+
+        ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
+        });
+
+        return super.post(request);
+    }
+
+    /**
+     * 요청한 세션에 사용자의 구독 이벤트를 구독합니다.<br/>
+     * 구독이 완료될 경우 요청한 세션으로 이벤트 구독 메시지가 전달 됩니다.<br/>
+     * 이벤트 구독 시, 구독한 채널에 후원이 발생할 때 후원 이벤트 메시지가 전달됩니다.
+     * <p>관련 Scope : 후원 조회</p>
+     * <p>*세션당 최대 30개의 이벤트(채팅, 후원, 구독)를 구독할 수 있습니다.</p>
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-9">공식 API 문서</a>를 참조하세요.</p>
+     */
+    public Response<EmptyResponse> subscribeSubscriptionEvent(String sessionKey) {
+        String path = "/open/v1/sessions/events/subscribe/subscription";
+        Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
+
+        ApiRequest<EmptyRequest, EmptyResponse> request = new ApiRequest<>(path, null, null, queryParams, null, new TypeReference<>() {
+        });
+
+        return super.post(request);
+    }
+
+    /**
+     * 요청한 세션에 사용자의 구독 이벤트를 구독 취소합니다.<br/>
+     * 구독이 취소될 경우 요청한 세션으로 이벤트 구독 취소 메시지가 전달 됩니다.
+     * <p>자세한 내용은
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-10">공식 API 문서</a>를 참조하세요.</p>
+     */
+    public Response<EmptyResponse> unsubscribeSubscriptionEvent(String sessionKey) {
         String path = "/open/v1/sessions/events/unsubscribe/donation";
         Map<String, Object> queryParams = Map.of("sessionKey", sessionKey);
 

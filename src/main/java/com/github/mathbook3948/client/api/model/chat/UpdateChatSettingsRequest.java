@@ -1,5 +1,6 @@
 package com.github.mathbook3948.client.api.model.chat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateChatSettingsRequest {
 
     /**
@@ -42,4 +44,17 @@ public class UpdateChatSettingsRequest {
      * FOLLOWER 모드 설정된 경우 구독자는 최소 팔로잉 기간 조건 대상에서 제외 허용 할지 여부
      */
     private boolean allowSubscriberInFollowerMode;
+
+    /**
+     * 시청자의 채팅 전송 간격 (초)
+     * <p>
+     * 허용 값: 0 (저속모드 Off), 3, 5, 10, 30, 60, 120, 300 값만 허용
+     * </p>
+     */
+    private Integer chatSlowModeSec;
+
+    /**
+     * 이모티콘 모드 사용 여부
+     * */
+    private Boolean chatEmojiMode;
 }

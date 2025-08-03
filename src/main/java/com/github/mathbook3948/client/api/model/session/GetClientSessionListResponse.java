@@ -47,7 +47,7 @@ public class GetClientSessionListResponse {
 
             /**
              * <p>이벤트 종류</p>
-             * <p>CHAT/DONATION</p>
+             * <p>CHAT/DONATION/SUBSCRIPTION</p>
              * */
             private String eventType;
 

@@ -69,7 +69,7 @@ public class SessionApi extends AbstractApi {
     /**
      * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
      * <p>자세한 내용은
-     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-3">공식 API 문서</a>를 참조하세요.</p>
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-3">공식 API 문서</a>를 참조하세요.</p>
      * */
     public Response<GetClientSessionListResponse> getClientSessionList(GetClientSessionListRequest req) {
         String path = "/open/v1/sessions/client";
@@ -88,7 +88,7 @@ public class SessionApi extends AbstractApi {
     /**
      * Client 인증 기반의 생성된 세션을 조회합니다. 연결이 끊어진 세션은 일정 시간 동안만 조회가 가능합니다.
      * <p>자세한 내용은
-     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/live#undefined-4">공식 API 문서</a>를 참조하세요.</p>
+     * <a href="https://chzzk.gitbook.io/chzzk/chzzk-api/session#undefined-4">공식 API 문서</a>를 참조하세요.</p>
      * */
     public Response<GetUserSessionListResponse> getUserSessionList(GetUserSessionListRequest req) {
         String path = "/open/v1/sessions";
