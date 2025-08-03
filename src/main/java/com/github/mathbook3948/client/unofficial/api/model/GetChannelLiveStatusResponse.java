@@ -1,5 +1,6 @@
 package com.github.mathbook3948.client.unofficial.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GetChannelLiveStatusResponse {
     /**
      * 채널 구분자
@@ -77,6 +79,9 @@ public class GetChannelLiveStatusResponse {
     private String createdAt;
     private String updatedAt;
     private String channelName;
+    private String tvAppViewingPolicyType;
+    private Boolean logPowerActive;
+    private Boolean logPowerRankingExposure;
 
     private PlayerRecommendContent playerRecommendContent;
 
